@@ -22,6 +22,7 @@
 ███████║╚██████╗██║  ██║██║  ██║   ██║   ╚██████╗██║  ██║
 ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝
 ```
+ ![Image Alt](image_url)
 
 > Learning Machine Learning from scratch through notes, experiments, visualizations, and projects.
 
