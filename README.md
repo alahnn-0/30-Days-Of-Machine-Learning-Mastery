@@ -64,18 +64,18 @@ Projects
 
 ## 📈 Progress
 
+
+\
+
 ```text
-[██░░░░░░░░░░░░░░░░░░] 2 / 30 Days Completed
+Progress: [██░░░░░░░░░░░░░░░░░░░░░░░░░░] 2/30 (6.7%)
 ```
 
-| Day | Topic                     | Status |
-| --- | ------------------------- | ------ |
-| 1   | ML Introduction & NumPy   | ✅      |
-| 2   | Pandas & Matplotlib       | ✅      |
-| 3   | Exploratory Data Analysis | ⏳      |
-| 4   | Data Cleaning             | ⏳      |
-| 5   | Feature Analysis          | ⏳      |
+### Milestones
 
----
+* [x] Day 1 - ML Introduction & NumPy
+* [x] Day 2 - Pandas & Matplotlib
+* [ ] Day 3 - Data Visualization,Data Cleaning and Feature Engneering
+
 
 *"Learning Machine Learning one day at a time, one project at a time."*
