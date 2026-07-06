@@ -22,7 +22,7 @@
 ███████║╚██████╗██║  ██║██║  ██║   ██║   ╚██████╗██║  ██║
 ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝
 ```
- ![Image Alt](image_url)
+ ![Image Alt](https://github.com/alahnn-0/30-Days-Of-Machine-Learning-Mastery/blob/main/ChatGPT%20Image%20Jul%206%2C%202026%2C%2009_05_21%20PM.png)
 
 > Learning Machine Learning from scratch through notes, experiments, visualizations, and projects.
 
