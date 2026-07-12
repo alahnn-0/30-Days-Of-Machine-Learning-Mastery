@@ -75,9 +75,9 @@ Progress: [██░░░░░░░░░░░░░░░░░░░░░
 
 * [x] Day 1 - ML Introduction & NumPy
 * [x] Day 2 - Pandas & Matplotlib
-* [ ] Day 3 - Data Visualization,Data Cleaning and Feature Engneering
-* [ ] Day 4 - Linear Regression & Performance Measures
-* [ ] Day 5 - Sensitivity, Specificity, Bias-Variance, Entropy & Mutual Information
+* [x] Day 3 - Data Visualization,Data Cleaning and Feature Engneering
+* [x] Day 4 - Linear Regression & Performance Measures
+* [x] Day 5 - Sensitivity, Specificity, Bias-Variance, Entropy & Mutual Information
 
 
 *"Learning Machine Learning one day at a time, one project at a time."*
