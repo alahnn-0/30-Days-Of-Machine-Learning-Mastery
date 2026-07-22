@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hepatitis Risk Screening — Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F7F6;
+    --panel: #FFFFFF;
+    --ink: #16241F;
+    --ink-soft: #55655F;
+    --line: #DCE3DF;
+    --accent: #0F6E6E;
+    --accent-soft: #E4F1EF;
+    --risk-high: #A5402C;
+    --risk-high-bg: #FBECE8;
+    --risk-low: #2E7D5B;
+    --risk-low-bg: #E9F5EE;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  header {
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+    padding: 28px 24px 24px;
+  }
+
+  .header-inner {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    margin: 0 0 6px;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .subtitle {
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    max-width: 58ch;
+  }
+
+  .disclaimer {
+    margin-top: 16px;
+    padding: 10px 14px;
+    background: #FFF8E8;
+    border: 1px solid #EFDFAE;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #6B5B1E;
+  }
+
+  main {
+    max-width: 760px;
+    margin: 32px auto 64px;
+    padding: 0 24px;
+  }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 28px;
+  }
+
+  .panel + .panel { margin-top: 20px; }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 20px;
+  }
+
+  @media (max-width: 560px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .field label {
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  .field input, .field select {
+    font-family: var(--mono);
+    font-size: 14px;
+    padding: 9px 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #FCFDFC;
+    color: var(--ink);
+  }
+
+  .field input:focus, .field select:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+    border-color: var(--accent);
+  }
+
+  .submit-row {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  button {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 14.5px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 22px;
+    cursor: pointer;
+  }
+
+  button:hover { background: #0C5A5A; }
+
+  .error {
+    color: var(--risk-high);
+    font-size: 13.5px;
+  }
+
+  /* Result */
+  .result-panel { border-color: var(--accent); }
+
+  .result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 18px;
+  }
+
+  .result-badge {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 14px;
+    padding: 4px 12px;
+    border-radius: 999px;
+  }
+
+  .result-badge.high { background: var(--risk-high-bg); color: var(--risk-high); }
+  .result-badge.low { background: var(--risk-low-bg); color: var(--risk-low); }
+
+  .gauge {
+    height: 10px;
+    border-radius: 999px;
+    background: var(--line);
+    overflow: hidden;
+    margin: 14px 0 8px;
+  }
+
+  .gauge-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.4s ease;
+  }
+
+  .gauge-fill.high { background: var(--risk-high); }
+  .gauge-fill.low { background: var(--risk-low); }
+
+  .gauge-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .result-note {
+    margin-top: 16px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+
+  footer {
+    max-width: 760px;
+    margin: 0 auto 40px;
+    padding: 0 24px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="eyebrow">Prototype · Not for clinical use</div>
+    <h1>Hepatitis Outcome-Risk Screening</h1>
+    <p class="subtitle">Estimates relative risk from a Random Forest model trained on the UCI Hepatitis dataset (clinical signs, symptoms, and lab values).</p>
+    <div class="disclaimer">This tool is an educational demo, not a diagnostic device. It does not test for Hepatitis B infection itself (no HBsAg/serology data used) and must not inform real medical decisions.</div>
+  </div>
+</header>
+
+<main>
+
+  {% if result %}
+  <div class="panel result-panel">
+    <div class="section-label">Result</div>
+    <div class="result-header">
+      <div>
+        <div style="font-size:15px;color:var(--ink-soft);">Model estimate</div>
+        <div style="font-size:22px;font-weight:600;">{{ result.prediction }}</div>
+      </div>
+      <div class="result-badge {{ result.risk_class }}">{{ result.probability }}% severity-risk score</div>
+    </div>
+    <div class="gauge">
+      <div class="gauge-fill {{ result.risk_class }}" style="width: {{ result.probability }}%;"></div>
+    </div>
+    <div class="gauge-label"><span>0%</span><span>100%</span></div>
+    <p class="result-note">Score reflects the model's estimated probability of the higher-severity outcome class in the training data, based on the values entered below. It is not a probability of Hepatitis B infection.</p>
+  </div>
+  {% endif %}
+
+  {% if error %}
+  <div class="panel">
+    <p class="error">{{ error }}</p>
+  </div>
+  {% endif %}
+
+  <form method="POST" action="/predict">
+    <div class="panel">
+      <div class="section-label">Patient Input</div>
+      <div class="grid">
+        {% for name, ftype, display_label in fields %}
+        <div class="field">
+          <label for="{{ name }}">{{ display_label }}</label>
+          {% if ftype == "number" %}
+            <input type="number" step="any" id="{{ name }}" name="{{ name }}"
+                   value="{{ form_values[name] if form_values else '' }}" required>
+          {% elif ftype == "sex" %}
+            <select id="{{ name }}" name="{{ name }}" required>
+              <option value="" disabled {% if not form_values %}selected{% endif %}>Select…</option>
+              <option value="1" {% if form_values and form_values[name]=='1' %}selected{% endif %}>Male</option>
+              <option value="2" {% if form_values and form_values[name]=='2' %}selected{% endif %}>Female</option>
+            </select>
+          {% else %}
+            <select id="{{ name }}" name="{{ name }}" required>
+              <option value="" disabled {% if not form_values %}selected{% endif %}>Select…</option>
+              <option value="1" {% if form_values and form_values[name]=='1' %}selected{% endif %}>Yes</option>
+              <option value="2" {% if form_values and form_values[name]=='2' %}selected{% endif %}>No</option>
+            </select>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      <div class="submit-row">
+        <button type="submit">Run prediction</button>
+      </div>
+    </div>
+  </form>
+
+</main>
+
+<footer>
+  Model: Random Forest · Dataset: UCI Hepatitis (155 records) · For learning/demo purposes only.
+</footer>
+
+</body>
+</html>

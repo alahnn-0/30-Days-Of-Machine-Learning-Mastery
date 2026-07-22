@@ -1,0 +1,12 @@
+# --- Core (required to run the app) ---
+flask
+pandas
+numpy
+scikit-learn
+joblib
+
+# --- Optional (for next-step upgrades) ---
+# gunicorn        # production WSGI server for deployment
+# shap            # per-prediction explainability
+# xgboost         # stronger model than Random Forest
+# imbalanced-learn  # SMOTE for class imbalance
